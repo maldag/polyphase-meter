@@ -7,4 +7,13 @@ services:
     privileged: true
     volumes:
       - .:/app
+  web:
+    image: gists/lighttpd
+    restart: always
+    ports:
+      - "8088:80"
+    volumes:
+      - ./log:/var/www/smartmeter
+    depends_on:
+      - smartmeter-reader
 

@@ -10,10 +10,10 @@ use Monolog\Handler\StreamHandler;
 use Monolog\Formatter\LineFormatter;
 
 $logger_raw = new Logger('polyphase_meter');
-$logger_raw->pushHandler(new StreamHandler(__DIR__.'/../log_raw.log', Logger::INFO));
+$logger_raw->pushHandler(new StreamHandler(__DIR__.'/../log/log_raw.log', Logger::INFO));
 
 $logger_csv = new Logger('polyphase_meter');
-$stream = new StreamHandler(__DIR__.'/../data.csv', Logger::INFO);
+$stream = new StreamHandler(__DIR__.'/../log/data.csv', Logger::INFO);
 
 $dateFormat = "Y-m-d\TH:i:s";
 $output = "%datetime%;%message%\n";
@@ -94,7 +94,7 @@ $logger_csv->info($log_string);
 
 $json_string=json_encode($mapping,JSON_PRETTY_PRINT);
 
-$json_path = "json_dump.json";
+$json_path = "log/index.html";
 $fp = fopen($json_path,"w");
 fwrite($fp,$json_string);
 fclose($fp);
