@@ -6,14 +6,14 @@ namespace ws\loewe\polyphase_meter;
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
+use Monolog\Handler\RotatingFileHandler;
 use Monolog\Formatter\LineFormatter;
 
 $logger_raw = new Logger('polyphase_meter');
-$logger_raw->pushHandler(new StreamHandler(__DIR__.'/../log/log_raw.log', Logger::INFO));
+$logger_raw->pushHandler(new RotatingFileHandler(__DIR__.'/../log/log_raw.log',1, Logger::INFO));
 
 $logger_csv = new Logger('polyphase_meter');
-$stream = new StreamHandler(__DIR__.'/../log/data.csv', Logger::INFO);
+$stream = new RotatingFileHandler(__DIR__.'/../log/data.csv',1, Logger::INFO,);
 
 $dateFormat = "Y-m-d\TH:i:s";
 $output = "%datetime%;%message%\n";
